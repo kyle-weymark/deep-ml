@@ -17,15 +17,15 @@ def compute_norm(arr: np.ndarray, norm_type: str) -> float:
     # Your code here
     match norm_type:
         case 'l1':
-            return  np.linalg.norm(arr.ravel(), ord=1)
+            return float(np.abs(arr).sum())
         case 'l2':
-            return np.linalg.norm(arr.ravel(), ord=2)
+            return float(np.sqrt(np.vdot(arr, arr).real))
         case 'linf':
-            return np.linalg.norm(arr.ravel(), ord=np.inf)
+            return float(np.abs(arr).max())
         case 'frobenius':
             if arr.ndim != 2:
                 raise ValueError("Frobenius Norm requires two dimensions")
             else:
-                return np.linalg.norm(arr, ord='fro')
+                return float(np.sqrt(np.vdot(arr, arr).real))
         case _:
             raise ValueError(f'Unknown norm_type {norm_type}')
